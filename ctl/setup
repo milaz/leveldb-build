@@ -1,0 +1,29 @@
+#!/bin/sh
+
+echo Checking out Snappy...
+svn checkout http://snappy.googlecode.com/svn/trunk/ snappy
+
+echo Building Snappy...
+cd ./snappy
+./autogen.sh
+./configure --disable-shared --with-pic
+make
+
+SNAPPY_PATH=`cd ../snappy; pwd`
+export LIBRARY_PATH=${SNAPPY_PATH}/.libs
+export C_INCLUDE_PATH=${SNAPPY_PATH}
+export CPLUS_INCLUDE_PATH=${SNAPPY_PATH}
+
+cd ..
+
+echo Checking out Leveldb...
+git clone https://code.google.com/p/leveldb/
+
+patch -p1 < ./ctl/Makefile.patch
+
+echo Building Leveldb...
+cd leveldb
+make
+
+cd ..
+
