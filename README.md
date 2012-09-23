@@ -16,7 +16,24 @@ The libraries that are built with these scripts are not installed system-wide.
 Instead, an isolated environment is set up where you can experiment with
 certain versions of these libraries and their bindings. 
 
-## How to use it
+## How to use
+
+### In short
+
+```
+./ctl/setup
+source ./ctl/go-env
+
+go get github.com/jmhodges/levigo
+go test github.com/jmhodges/levigo
+
+mkdir -p ./src/project
+cd !$
+```
+
+And start hacking ;)
+
+### Detailed description
 
 This collection of scripts is intended to be used with GNU toolchain. For
 specific commands that must be installed on your system, see "Prerequisites"
@@ -64,14 +81,17 @@ the future.
 
 ## Credits
 
-In discussion of LevelDB issue #27, Alessio Treglia, Kim Altintop and Jeff
-Hodges proposed patches that allow to build LevelDB as a shared library.
+In discussion of 
+[LevelDB issue #27](https://code.google.com/p/leveldb/issues/detail?id=27), 
+Alessio Treglia, Kim Altintop and Jeff Hodges proposed patches that allow
+building LevelDB as a shared library.
 
-At https://github.com/fusesource/leveldbjni/blob/master/readme.md Hiram
-Chirino gives essential instructions on building LevelDB with Snappy support.
+I found 
+[instructions by Hiram Chirino](https://github.com/fusesource/leveldbjni/blob/master/readme.md) 
+very helpful to get going on building LevelDB with Snappy support.
 
 Finally, at 
-[leveldb issue #94](https://code.google.com/p/leveldb/issues/detail?id=94), 
+[LevelDB issue #94](https://code.google.com/p/leveldb/issues/detail?id=94), 
 JT Olds pointed out that Snappy is not linked to the resulting
 `libleveldb.so`. Sadly, while he proposed the patch, it is left without due
 attention. That leads to a lot of strange situations, e.g. inability to use
